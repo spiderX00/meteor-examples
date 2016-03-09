@@ -1,26 +1,34 @@
 if (Meteor.isClient) {
 
-  angular.module('app', [])
+  angular.module('app', ['ui.router'])
   .config(settings)
   .run(app)
   .controller('SessionCtrl', SessionCtrl)
 
-  settings.$inject = []
+  settings.$inject = ['$stateProvider', '$urlRouterProvider']
 
-  function settings(){
-    //console.log('settings');
+  function settings($stateProvider, $urlRouterProvider){
+
+    $urlRouterProvider.otherwise("/home");
+
+    $stateProvider
+      .state('home',{
+      url: "/home",
+      templateUrl: '/home.html',
+      controller: "SessionCtrl as Session"
+    })
   }
 
   app.$inject = ['$rootScope'];
 
   function app($rootScope){
-    //console.log('running!');
+
   }
 
   SessionCtrl.$inject = ['$scope'];
 
   function SessionCtrl($scope){
-    Session = this;
+    let Session = this;
     Session.setDefault = function(val){
        Session.counter = val;
     }
@@ -29,7 +37,6 @@ if (Meteor.isClient) {
     }
     Session.setDefault(0);
   }
-
 }
 
 if (Meteor.isServer) {
@@ -39,6 +46,5 @@ if (Meteor.isServer) {
     _.forEach(obj, function(el){
       console.log(el);
     })
-
   });
 }
