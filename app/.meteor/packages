@@ -19,3 +19,11 @@ insecure                # Allow all DB writes from clients (for prototyping)
 angular
 alethes:lodash
 urigo:angular-ui-router
+
+netanelgilad:angular-server
+logging
+random
+ejson
+spacebars
+check
+
